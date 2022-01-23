@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { getAuth,onAuthStateChanged } from "firebase/auth";
 import { loginSincrono } from '../actions/actionLogin';
 import Recetas from '../Pages/Recetas';
+import Register from '../Pages/Register';
 
 function AppRouter() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false)
@@ -36,11 +37,11 @@ function AppRouter() {
         <PublicRoute isAuthenticated={isLoggedIn}>
             <Login/> 
         </PublicRoute>}/>
-        {/* <Route path="/register" element={
+         <Route path="/register" element={
         <PublicRoute isAuthenticated={isLoggedIn}>
             <Register/>
         </PublicRoute>
-        }/> */}
+        }/> 
         <Route path="/*" element={
           <PrivateRoute isAuthenticated={isLoggedIn}>
               <DashboardRoutes/>

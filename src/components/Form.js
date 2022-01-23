@@ -97,6 +97,7 @@ function Form({ risoto }) {
               <div>
                 <p>{pro.product}</p>
                 <p>{pro.brand}</p>
+                <p>{pro.quantity}</p>
               </div>
             </div>
             <div>
@@ -113,13 +114,6 @@ function Form({ risoto }) {
           </div>
         ))}
       </form>
-      {/* <input
-        className="form-check-input"
-        type="checkbox"
-        onChange={handleChange}
-        value={pro.product}
-        style={{ transform: "scale(1.5)" }}
-      /> */}
     </div>
   );
 }

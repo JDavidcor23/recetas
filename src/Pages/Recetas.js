@@ -1,30 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import { logout } from "../actions/actionLogin";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Recetas = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate("/");
+  const [risoto, setRisoto] = useState([]);
+  React.useEffect(() => {
+    fetch("https://recipe-rissoto.vercel.app/recipe")
+      .then((resp) => resp.json())
+      .then((data) => setRisoto(data));
+    }, []);
+    const handleLogout = () => {
+    localStorage.setItem("product",JSON.stringify(risoto))
+    setTimeout(() => {
+      navigate("/product");
+    }, 1000);
   };
   return (
     <div>
       <Navbar />
-      <button onClick={() => handleLogout()}>Logout</button>
-      <div className="card" style={{ width: "18rem" }}>
-        <div className="card-body">
-          <h5 className="card-title">Card title</h5>
-          <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+      <div style={{width:"90%", margin:"0 auto"}}>
+      <div className="card" style={{ width: "18rem", padding:"20px" }} >
+        <div className="card-body" style={{display:"flex", justifyContent:"center", alignItems:"center"}}>
+          <h5 className="card-title">Receta de hoy</h5>
+          <button style={{margin:"0 0 0 20px", width:"50px"}} onClick={handleLogout}>Ir</button>
         </div>
       </div>
-      <Link to="/product">IRR</Link>
+      </div>
     </div>
   );
 };

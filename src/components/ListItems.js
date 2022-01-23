@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-
-const ListItems = ({ risoto }) => {
+import Modal from "./Modal";
+const ListItems = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   const { items } = useSelector((state) => state.cart);
   const sumTotal = () => {
     const reducer = (acumulador, currentValue) =>
@@ -19,6 +20,7 @@ const ListItems = ({ risoto }) => {
     let sum = sumTotal();
     return Number(sum) + 7;
   };
+
   return (
     <div style={{
       display: "flex",
@@ -61,7 +63,8 @@ const ListItems = ({ risoto }) => {
           <p>Total</p>
           <p>{total()}$</p>
         </div>
-        <button style={{ width: "100%" }}>Comprar ingredientes:{total()}$</button>
+        <button style={{ width: "100%" }} onClick={()=>setModalOpen(true)}>Comprar ingredientes:{total()}$</button>
+        {modalOpen && <Modal setOpenModal={setModalOpen} />}
       </div>
       } 
     </div>
